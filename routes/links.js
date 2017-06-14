@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const links = [
+let links = [
     {
         title: 'ProgrammableWeb API Directory',
         url: 'https://www.programmableweb.com/apis/directory',
@@ -21,6 +21,16 @@ const links = [
 
 router.get('/links', (req, res) => {
     res.json(links)
+})
+
+router.post('/links', (req, res) => {
+    const newPost = req.body
+    if (!newPost) {
+        res.status(400).json({ error: 'Please provide post' })
+        return
+    }
+    links.push(newPost)
+    res.status(201).json(newPost)
 })
 
 module.exports = router

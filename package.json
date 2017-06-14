@@ -1,12 +1,13 @@
 {
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3"
   },
   "name": "links-api",
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
-  "scripts":{
+  "scripts": {
     "start": "node app.js"
   }
 }

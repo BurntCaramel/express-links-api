@@ -1,25 +1,25 @@
 const express = require('express')
+const shortid = require('shortid')
 
 // Make a new Express Router
 const router = express.Router()
 
 // Data
-let linkNextID = 4
 let links = [
     {
-        id: '1',
+        id: shortid.generate(),
         title: 'ProgrammableWeb API Directory',
         url: 'https://www.programmableweb.com/apis/directory',
         tags: ['api']
     },
     {
-        id: '2',
+        id: shortid.generate(),
         title: 'Presentational and Container Components',
         url: 'https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0',
         tags: ['react', 'component']
     },
     {
-        id: '3',
+        id: shortid.generate(),
         title: 'Traversing Twists and Turns',
         url: 'https://medium.com/@vicalfieri/traversing-twists-and-turns-c298d9d4636',
         tags: ['vic', 'blog']
@@ -28,6 +28,7 @@ let links = [
 
 // Read: when GET /links is received
 router.get('/links', (req, res) => {
+    // e.g. /links?title=api
     const searchTitle = (req.query.title || '').toLowerCase()
 
     // Start with all links
@@ -70,9 +71,7 @@ router.post('/links', (req, res) => {
     }
 
     // Copy and assign id (converted to string)
-    newLink = Object.assign({}, newLink, { id: `${linkNextID}` })
-    // Increment next id
-    linkNextID += 1
+    newLink = Object.assign({}, newLink, { id: shortid.generate() })
     // Add to our in-memory database
     links.push(newLink)
     // Send back JSON in the response

@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "body-parser": "^1.17.2",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "shortid": "^2.2.8"
   },
   "name": "links-api",
   "version": "0.1.0",

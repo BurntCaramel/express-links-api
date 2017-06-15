@@ -25,11 +25,25 @@ let links = [
     }
 ]
 
-// Read: when GET /links is received
+// Read list: when GET /links is received
 router.get('/links', (req, res) => {
     // Send back JSON in the response
     res.json({
         items: links
+    })
+})
+
+// Read single
+router.get('/links/:id', (req, res) => {
+    const id = req.params.id
+    const link = links.find((link) => id.link === id)
+    if (!link) {
+        res.status(404).json({ error: `No link with id '${id}' was found` })
+        return
+    }
+    // Send back JSON in the response
+    res.json({
+        item: link
     })
 })
 

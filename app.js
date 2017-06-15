@@ -13,5 +13,5 @@ app.use(linksRouter)
 
 // Start the web server!
 app.listen(process.env.PORT || 7000, () => {
-    console.log('Server started at localhost:8000')
+    console.log('Server started at localhost:7000')
 })

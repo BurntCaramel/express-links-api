@@ -28,9 +28,21 @@ let links = [
 
 // Read: when GET /links is received
 router.get('/links', (req, res) => {
+    const searchTitle = (req.query.title || '').toLowerCase()
+
+    // Start with all links
+    let foundLinks = links
+    // If search for title
+    if (searchTitle) {
+        // Filter down where title includes the queried title
+        foundLinks = foundLinks.filter((link) => {
+            return link.title.toLowerCase().includes(searchTitle)
+        })
+    }
+    
     // Send back JSON in the response
     res.json({
-        items: links
+        items: foundLinks
     })
 })
 

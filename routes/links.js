@@ -1,6 +1,9 @@
 const express = require('express')
+
+// Make a new Express Router
 const router = express.Router()
 
+// Data
 let links = [
     {
         title: 'ProgrammableWeb API Directory',
@@ -19,18 +22,28 @@ let links = [
     }
 ]
 
+// Read: when GET /links is received
 router.get('/links', (req, res) => {
-    res.json(links)
+    // Send back JSON in the response
+    res.json({
+        items: links
+    })
 })
 
+// Create: when POST /links is received
 router.post('/links', (req, res) => {
-    const newPost = req.body
-    if (!newPost) {
-        res.status(400).json({ error: 'Please provide post' })
+    const newLink = req.body
+    // Check if request has valid data
+    if (!newLink) {
+        res.status(400).json({ error: 'Please provide a link' })
         return
     }
-    links.push(newPost)
-    res.status(201).json(newPost)
+
+    // Add to our in-memory database
+    links.push(newLink)
+    // Send back JSON in the response
+    res.status(201).json(newLink)
 })
 
 module.exports = router
+// Same as: export default router
